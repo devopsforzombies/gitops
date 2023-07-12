@@ -1,0 +1,21 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: argocd-gitops-application
+  namespace: argocd
+  annotations:
+    notifications.argoproj.io/subscribe.on-sync-succeeded.slack: argocd-alerts
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: argocd-gitops-project
+  source:
+    repoURL: https://github.com/devopsforzombies/gitops
+    targetRevision: argocd-poc
+    path: k8s/examples/kustomize/dev
+    kustomize:
+      version: default
+  destination:
+    name: gitops-lab
+    namespace: 'argocd-poc'
+  syncPolicy: {}

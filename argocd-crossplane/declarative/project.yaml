@@ -1,0 +1,22 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: argocd-gitops
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  description: "search service"
+  sourceRepos:
+  - 'git@github.com:devopsforzombies/gitops.git'
+  destinations:
+  - namespace: 'argocd-poc'
+    server: 'EKS_CLUSTER_API_URL'
+  clusterResourceWhitelist:
+  - group: "*"
+    kind: "*"
+  namespaceResourceWhitelist:
+  - group: "*"
+    kind: "*"
+  orphanedResources:
+    warn: true
