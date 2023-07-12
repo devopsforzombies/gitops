@@ -10,7 +10,7 @@ metadata:
 spec:
   project: argocd-gitops-project
   source:
-    repoURL: https://github.com/devopsforzombies/gitops
+    repoURL: git@github.com:devopsforzombies/gitops.git
     targetRevision: argocd-poc
     path: k8s/examples/kustomize/dev
     kustomize:
